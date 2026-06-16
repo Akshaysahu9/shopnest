@@ -1,0 +1,16 @@
+{
+  "name": "ShopNest — Online Shopping",
+  "short_name": "ShopNest",
+  "description": "Shop electronics, fashion, home & more at ShopNest",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#131921",
+  "theme_color": "#131921",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
