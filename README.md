@@ -1,7 +1,7 @@
 # ShopNest — Full-Stack E-Commerce
 
 React frontend + Node.js/Express REST API + MongoDB.
-
+live link:- "https://shopnest-omega.vercel.app/"
 ## Stack
 
 | Layer | Tech |
