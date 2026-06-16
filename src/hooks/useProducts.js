@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react'
 import { productApi } from '../services/api'
 import { filterProducts, getProduct, getRelated } from '../data/products'
 
+// Vercel = frontend only; no backend unless VITE_API_URL is set
+const useLocalCatalog = import.meta.env.PROD && !import.meta.env.VITE_API_URL
+
 export function useProducts(params = {}) {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
@@ -17,11 +20,24 @@ export function useProducts(params = {}) {
     setError(null)
     setOffline(false)
 
+    if (useLocalCatalog) {
+      const local = filterProducts(params)
+      setProducts(local.products)
+      setTotal(local.total)
+      setOffline(true)
+      setLoading(false)
+      return () => { cancelled = true }
+    }
+
     productApi.list(params)
       .then(res => {
         if (cancelled) return
-        setProducts(res.products || [])
-        setTotal(res.total || 0)
+        if (res.success && Array.isArray(res.products)) {
+          setProducts(res.products)
+          setTotal(res.total ?? res.products.length)
+          return
+        }
+        throw new Error('Invalid product list response')
       })
       .catch(() => {
         if (cancelled) return
@@ -53,11 +69,29 @@ export function useProduct(id) {
     setLoading(true)
     setOffline(false)
 
+    if (useLocalCatalog) {
+      const local = getProduct(id)
+      if (local) {
+        setProduct(local)
+        setRelated(getRelated(local))
+        setOffline(true)
+        setError(null)
+      } else {
+        setError('Product not found')
+      }
+      setLoading(false)
+      return () => { cancelled = true }
+    }
+
     productApi.get(id)
       .then(res => {
         if (cancelled) return
-        setProduct(res.product)
-        setRelated(res.related || [])
+        if (res.success && res.product) {
+          setProduct(res.product)
+          setRelated(res.related || [])
+          return
+        }
+        throw new Error('Invalid product response')
       })
       .catch(() => {
         if (cancelled) return

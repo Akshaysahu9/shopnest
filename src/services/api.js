@@ -10,7 +10,15 @@ export async function api(path, options = {}) {
   if (token) headers.Authorization = `Bearer ${token}`
 
   const res = await fetch(`${BASE}${path}`, { ...options, headers })
-  const data = await res.json().catch(() => ({}))
+
+  const contentType = res.headers.get('content-type') || ''
+  if (!contentType.includes('application/json')) {
+    throw new Error('API unavailable')
+  }
+
+  const data = await res.json().catch(() => {
+    throw new Error('Invalid API response')
+  })
 
   if (!res.ok) {
     throw new Error(data.message || `Request failed (${res.status})`)
