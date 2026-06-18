@@ -1,86 +1,312 @@
-# ShopNest — Full-Stack E-Commerce
+# 🛒 ShopNest – Full-Stack E-Commerce Platform
 
-React frontend + Node.js/Express REST API + MongoDB.
-live link:- "https://shopnest-omega.vercel.app/"
-## Stack
+ShopNest is a modern full-stack e-commerce platform inspired by leading online marketplaces. It provides a complete shopping experience with secure authentication, product discovery, cart management, and order processing.
 
-| Layer | Tech |
-|-------|------|
-| Frontend | React 18, Vite, React Router |
-| Backend | Node.js, Express |
-| Database | MongoDB (Mongoose) |
-| Auth | JWT + bcrypt |
+Built using React, Node.js, Express, MongoDB, and JWT Authentication, the platform demonstrates real-world full-stack development practices and scalable application architecture.
 
-## Features
+---
 
-- User registration & login
-- Product catalog from database (search, category, deals)
-- Server-side cart (logged-in users)
-- Guest cart (localStorage fallback)
-- Order placement & order history
-- Input validation, rate limiting, helmet security
+## 🌐 Live Demo
 
-## Setup
+🔗 https://shopnest-omega.vercel.app/
 
-### 1. MongoDB
+---
 
-**Option A — Local:** Install [MongoDB Community](https://www.mongodb.com/try/download/community) and run it.
+## 🚀 Key Features
 
-**Option B — Cloud (free):** [MongoDB Atlas](https://www.mongodb.com/atlas) → create cluster → copy connection string into `server/.env`:
+### 🔐 Authentication & Security
 
+* User Registration & Login
+* JWT-Based Authentication
+* Password Hashing with bcrypt
+* Protected Routes
+* Rate Limiting
+* Helmet Security Middleware
+* Input Validation & Sanitization
+
+### 🛍️ Product Catalog
+
+* Dynamic Product Listing
+* Product Details Page
+* Category-Based Browsing
+* Product Search Functionality
+* Special Deals & Offers
+* Database-Driven Product Management
+
+### 🛒 Shopping Cart
+
+* Server-Side Cart for Authenticated Users
+* Guest Cart using Local Storage
+* Add/Remove Products
+* Quantity Management
+* Persistent Shopping Experience
+
+### 📦 Order Management
+
+* Order Placement
+* Order History Tracking
+* User Order Dashboard
+* Purchase Summary
+
+### 📱 User Experience
+
+* Responsive Design
+* Fast Navigation
+* Modern UI Components
+* Mobile-Friendly Layout
+
+---
+
+## 🎯 Project Highlights
+
+* Full Stack MERN Application
+* RESTful API Architecture
+* JWT Authentication System
+* MongoDB Database Integration
+* Cart & Order Management System
+* Secure Backend Implementation
+* Responsive Frontend Design
+* Production Deployment
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+* React 18
+* Vite
+* React Router DOM
+* CSS3
+
+### Backend
+
+* Node.js
+* Express.js
+
+### Database
+
+* MongoDB
+* Mongoose
+
+### Authentication
+
+* JWT (JSON Web Token)
+* bcrypt
+
+### Security
+
+* Helmet
+* Express Rate Limit
+* Input Validation
+
+### Deployment
+
+* Vercel (Frontend)
+
+---
+
+## 🏗️ System Architecture
+
+```text
+User
+ │
+ ▼
+React Frontend
+ │
+ ▼
+Express REST API
+ │
+ ├──────────────┬──────────────┬──────────────┐
+ ▼              ▼              ▼              ▼
+Auth         Products        Cart         Orders
+ │              │              │              │
+ └──────────────┴──────────────┴──────────────┘
+                     │
+                     ▼
+                  MongoDB
 ```
-MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/shopnest
+
+---
+
+## 📷 Screenshots
+
+### 🏠 Homepage
+
+
+
+### 🛍️ Product Catalog
+
+
+
+### 📦 Product Details
+
+
+
+### 🛒 Shopping Cart
+
+
+
+### 📋 Order History
+
+
+
+### 🔐 Authentication
+
+---
+
+## ⚙️ Installation & Setup
+
+### Clone Repository
+
+```bash
+git clone https://github.com/Akshaysahu9/shopnest.git
 ```
 
-### 2. Install & Run
+### Install Dependencies
 
-**Easiest:** Double-click `START.bat`
-
-**Or manually:**
 ```bash
 npm install
-cd server && npm install && cd ..
+```
+
+### Backend Setup
+
+```bash
+cd server
+npm install
+```
+
+### Configure Environment Variables
+
+Create a `.env` file inside the server folder:
+
+```env
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+PORT=5000
+```
+
+### Start Development Server
+
+```bash
 npm run dev:all
 ```
 
-- Frontend: http://localhost:5173
-- Backend: http://localhost:5000/api/health
+Frontend:
 
-### Demo Login
+```text
+http://localhost:5173
 ```
+
+Backend:
+
+```text
+http://localhost:5000/api/health
+```
+
+---
+
+## 🧪 Demo Credentials
+
+```text
 Email: demo@shopnest.com
 Password: demo123
 ```
 
-## API Endpoints
+---
 
-| Method | Route | Auth | Description |
-|--------|-------|------|-------------|
-| POST | /api/auth/register | — | Create account |
-| POST | /api/auth/login | — | Login, get JWT |
-| GET | /api/auth/me | ✓ | Current user |
-| GET | /api/products | — | List/search products |
-| GET | /api/products/:id | — | Product detail |
-| GET | /api/products/deals/list | — | Deals |
-| GET | /api/cart | ✓ | Get cart |
-| POST | /api/cart | ✓ | Add to cart |
-| POST | /api/orders | ✓ | Place order |
-| GET | /api/orders | ✓ | My orders |
+## 📡 REST API Endpoints
 
-## Project Structure
+### Authentication
 
-```
+* POST `/api/auth/register`
+* POST `/api/auth/login`
+* GET `/api/auth/me`
+
+### Products
+
+* GET `/api/products`
+* GET `/api/products/:id`
+* GET `/api/products/deals/list`
+
+### Cart
+
+* GET `/api/cart`
+* POST `/api/cart`
+
+### Orders
+
+* POST `/api/orders`
+* GET `/api/orders`
+
+---
+
+## 📂 Project Structure
+
+```text
 shopnest/
-├── src/              # React frontend
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── hooks/
+│   └── services/
+│
 ├── server/
 │   └── src/
-│       ├── models/   # User, Product, Order
+│       ├── models/
 │       ├── routes/
 │       ├── controllers/
-│       └── middleware/
+│       ├── middleware/
+│       └── config/
+│
 └── START.bat
 ```
 
-## Resume Line
+---
 
-> Built a full-stack e-commerce platform with React, Node.js/Express REST API, MongoDB, and JWT authentication — featuring product catalog, cart management, and order processing.
+## 🎓 Learning Outcomes
+
+* Full Stack Development
+* REST API Design
+* Authentication & Authorization
+* MongoDB Database Design
+* Secure Backend Development
+* State Management
+* Deployment & Production Practices
+
+---
+
+## 🔮 Future Enhancements
+
+* Payment Gateway Integration
+* Admin Dashboard
+* Product Reviews & Ratings
+* Wishlist Functionality
+* Inventory Management
+* Order Tracking
+* Recommendation Engine
+* AI Product Search
+
+---
+
+## 👨‍💻 Author
+
+**Akshay Sahu**
+
+B.Tech Computer Science Engineering
+
+📧 [Akshayguptasahu@gmail.com](mailto:Akshayguptasahu@gmail.com)
+
+💼 LinkedIn: https://linkedin.com/in/akshay-gupta-97b6323a7
+
+🐙 GitHub: https://github.com/Akshaysahu9
+
+---
+
+## ⭐ Support
+
+If you found this project useful, consider giving it a ⭐ on GitHub.
+
+---
+
+### Built with ❤️ using React, Node.js, Express, MongoDB, and Modern Web Technologies.
