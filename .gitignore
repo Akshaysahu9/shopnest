@@ -8,7 +8,6 @@ server/.env
 Thumbs.db
 .vscode/
 .idea/
-.cursor/
 scripts/
 coverage/
 .cache/
